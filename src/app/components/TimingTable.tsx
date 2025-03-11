@@ -18,7 +18,7 @@ export default function TimingTable({ runners, previousSortedIds }: TimingTableP
         previousSortedIds={previousSortedIds}
       />
     )), 
-    [runners, previousSortedIds]
+    [previousSortedIds, runners]
   );
 
   return (

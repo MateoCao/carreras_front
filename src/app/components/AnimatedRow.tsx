@@ -10,6 +10,7 @@ interface AnimatedRowProps {
 export default function AnimatedRow({ runner, runners, previousSortedIds }: AnimatedRowProps) {
   const [animationClass, setAnimationClass] = useState("");
   const currentPosition = runners.findIndex(r => r.id === runner.id) + 1;
+  const [textColor, setColorText] = useState("");
 
   console.log("IDS ROWS:", previousSortedIds);
 
@@ -22,7 +23,13 @@ export default function AnimatedRow({ runner, runners, previousSortedIds }: Anim
     } else if (currentPosition > previousIndex) {
       setAnimationClass("row-move-down");
     }
-  }, [previousSortedIds, runner.id, currentPosition]);
+
+    if (runner.tiempo_mejor_vuelta < runners[0].tiempo_mejor_vuelta) {
+      setColorText("purple");
+    } else {
+      setColorText("");
+    }
+  }, [previousSortedIds, runner, currentPosition, runners]);
 
   return (
     <tr
@@ -35,7 +42,7 @@ export default function AnimatedRow({ runner, runners, previousSortedIds }: Anim
       <td className="px-4 py-2">{runner.velocidad_actual}</td>
       <td className="px-4 py-2">{runner.tiempo_ultima_vuelta}</td>
       <td className="px-4 py-2">{runner.tiempo_total}</td>
-      <td className="px-4 py-2">{runner.tiempo_mejor_vuelta}</td>
+      <td className={`px-4 py-2 ${textColor === "purple" ? "text-purple-500" : ""} `}>{runner.tiempo_mejor_vuelta}</td>
       <td className="px-4 py-2">{runner.distancia_total_recorrida}</td>
     </tr>
   );

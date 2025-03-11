@@ -1,4 +1,8 @@
+import { Navbar } from "./components/Navbar";
 import "./globals.css";
+import { config } from '@fortawesome/fontawesome-svg-core'
+import '@fortawesome/fontawesome-svg-core/styles.css'
+config.autoAddCss = false
 
 export default function RootLayout({
   children,
@@ -7,8 +11,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
-        {children}
+      <body className="flex w-dvw">
+        <aside>
+          <Navbar />
+        </aside>
+        <main className="bg-black text-white w-full p-5">
+          {children}
+        </main>
       </body>
     </html>
   );
