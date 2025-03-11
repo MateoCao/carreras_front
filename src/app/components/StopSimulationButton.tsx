@@ -3,7 +3,7 @@
 const StopSimulationButton = () => {
     const detenerSimulacion = async () => {
         try {
-            const response = await fetch("https://simulador-carreras.onrender.com/detener-simulacion", {
+            const response = await fetch("http://localhost:5000/detener-simulacion", {
                 method: "POST",
             });
             const data = await response.json();

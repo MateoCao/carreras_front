@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef } from "react";
-import { io, Socket } from "socket.io-client";
+import { Socket } from "socket.io-client";
 import { Runner } from "../types/Runner";
 import { RawRunner } from "../types/RawRunner";
+import { getSocket } from "../utils/socket";
 
 export const useLiveTimingData = () => {
     const [runners, setRunners] = useState<Runner[]>([]);
@@ -12,11 +13,7 @@ export const useLiveTimingData = () => {
 
     useEffect(() => {
         // Configuración del socket
-        const socket = io("https://simulador-carreras.onrender.com", {
-            transports: ["websocket"],
-            reconnection: true,
-            autoConnect: true,
-        });
+        const socket = getSocket();
 
         // Guardar referencia del socket
         socketRef.current = socket;
@@ -31,6 +28,10 @@ export const useLiveTimingData = () => {
         socket.on("disconnect", () => {
             console.log("🔴 Desconectado");
             setIsConnected(false);
+        });
+
+        socket.on('heartbeat', () => {
+            console.log("❤️ Heartbeat recibido");
         });
 
         // Manejar actualizaciones de datos

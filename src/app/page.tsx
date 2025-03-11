@@ -1,8 +1,9 @@
+import UploadForm from "./components/UploadForm";
 
 export default function Home() {
   return (
     <div>
-      HOME
+      <UploadForm />
     </div>
   );
 }

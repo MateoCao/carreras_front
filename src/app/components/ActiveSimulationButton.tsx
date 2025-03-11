@@ -3,7 +3,7 @@
 const IniciarSimulacionButton = () => {
     const iniciarSimulacion = async () => {
         try {
-            const response = await fetch("https://simulador-carreras.onrender.com/iniciar-simulacion", {
+            const response = await fetch("http://localhost:5000/iniciar-simulacion", {
                 method: "POST",
             });
             const data = await response.json();
